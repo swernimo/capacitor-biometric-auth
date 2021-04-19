@@ -38,7 +38,7 @@ public class BiometricAuth: CAPPlugin {
         let localAuthenticationContext = LAContext()
         localAuthenticationContext.localizedFallbackTitle = "Use Passcode"
         if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
-            call.resolve(["has": true, "type": BiometricAuth.biometricType(), "testing": true])
+            call.resolve(["has": true, "type": BiometricAuth.biometricType()])
         } else {
             guard let error = authError else {
                 return
