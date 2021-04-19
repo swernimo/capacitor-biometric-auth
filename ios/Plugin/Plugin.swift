@@ -8,13 +8,37 @@ import LocalAuthentication
  */
 @objc(BiometricAuth)
 public class BiometricAuth: CAPPlugin {
+    static func biometricType() -> String {
+        let authContext = LAContext()
+        if #available(iOS 11, *) {
+            let _ = authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+            switch(authContext.biometryType) {
+            case .none:
+                return BiometricType.none.rawValue
+            case .touchID:
+                return BiometricType.touch.rawValue
+            case .faceID:
+                return BiometricType.face.rawValue
+            @unknown default:
+                return BiometricType.none.rawValue
+            }
+        } else {
+            return authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) ? BiometricType.touch.rawValue : BiometricType.none.rawValue
+        }
+    }
+
+    enum BiometricType: String {
+        case none
+        case touch
+        case face
+    }
     
     @objc func isAvailable(_ call: CAPPluginCall) {
         var authError: NSError?
         let localAuthenticationContext = LAContext()
         localAuthenticationContext.localizedFallbackTitle = "Use Passcode"
         if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
-            call.resolve(["has": true])
+            call.resolve(["has": true, "type": BiometricAuth.biometricType()])
         } else {
             guard let error = authError else {
                 return
