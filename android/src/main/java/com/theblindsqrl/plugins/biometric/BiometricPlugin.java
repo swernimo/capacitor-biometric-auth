@@ -14,6 +14,7 @@ import com.getcapacitor.NativePlugin;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
+import com.getcapacitor.annotation.CapacitorPlugin;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
@@ -27,6 +28,8 @@ import javax.crypto.KeyGenerator;
 
 @CapacitorPlugin(name = "Biometric")
 public class BiometricPlugin extends Plugin {
+
+    private CancellationSignal cancellationSignal;
 
     @PluginMethod
     public void isAvailable(PluginCall call) {

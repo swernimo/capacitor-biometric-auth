@@ -1,6 +1,6 @@
 {
   "name": "capacitor-biometric-plugin",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A capacitor plugin for using biometric features of android and iOS devices.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
