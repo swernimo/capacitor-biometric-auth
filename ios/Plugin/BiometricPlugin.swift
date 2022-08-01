@@ -39,7 +39,7 @@ public class BiometricPlugin: CAPPlugin {
         let localAuthenticationContext = LAContext()
         localAuthenticationContext.localizedFallbackTitle = "Use Passcode"
         if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
-            call.resolve(["has": true, "type": BiometricAuth.biometricType()])
+            call.resolve(["has": true, "type": BiometricPlugin.biometricType()])
         } else {
             guard let error = authError else {
                 return
@@ -125,7 +125,7 @@ public class BiometricPlugin: CAPPlugin {
             }
         }
     }
-    
+
     @objc func evaluatePolicyFailErrorMessageForLA(errorCode: Int) -> Int {
         var errorCode = 0
         if #available(iOS 11.0, macOS 10.13, *) {

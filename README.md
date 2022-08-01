@@ -57,6 +57,7 @@ verify(options: { reason: string; }) => Promise<VerifyOptions>
 | ------------ | ----------------------------------------------- |
 | **`has`**    | <code>boolean</code>                            |
 | **`status`** | <code><a href="#errorcode">ErrorCode</a></code> |
+| **`type`**   | <code>string</code>                             |
 
 
 #### ErrorCode

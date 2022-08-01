@@ -6,7 +6,7 @@ export interface ErrorCode {
 export interface AvailableOptions {
   has: boolean;
   status: ErrorCode;
-  type: string;
+  type: 'none' | 'touch' | 'face';
 }
 
 export interface VerifyOptions {
