@@ -1,6 +1,6 @@
 # capacitor-biometric-plugin
 
-A capacitor plugin for using biometric features of android and iOS devices
+A capacitor plugin for using biometric features of android and iOS devices. This is a capacitor 3 version of the plugin created by Ariel Henández Musa https://github.com/arielhernandezmusa/capacitor-biometric-auth.
 
 ## Install
 
