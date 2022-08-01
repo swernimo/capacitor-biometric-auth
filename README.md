@@ -13,25 +13,65 @@ npx cap sync
 
 <docgen-index>
 
-* [`echo(...)`](#echo)
+* [`isAvailable()`](#isavailable)
+* [`verify(...)`](#verify)
+* [Interfaces](#interfaces)
 
 </docgen-index>
 
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-### echo(...)
+### isAvailable()
 
 ```typescript
-echo(options: { value: string; }) => Promise<{ value: string; }>
+isAvailable() => Promise<AvailableOptions>
 ```
 
-| Param         | Type                            |
-| ------------- | ------------------------------- |
-| **`options`** | <code>{ value: string; }</code> |
-
-**Returns:** <code>Promise&lt;{ value: string; }&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#availableoptions">AvailableOptions</a>&gt;</code>
 
 --------------------
+
+
+### verify(...)
+
+```typescript
+verify(options: { reason: string; }) => Promise<VerifyOptions>
+```
+
+| Param         | Type                             |
+| ------------- | -------------------------------- |
+| **`options`** | <code>{ reason: string; }</code> |
+
+**Returns:** <code>Promise&lt;<a href="#verifyoptions">VerifyOptions</a>&gt;</code>
+
+--------------------
+
+
+### Interfaces
+
+
+#### AvailableOptions
+
+| Prop         | Type                                            |
+| ------------ | ----------------------------------------------- |
+| **`has`**    | <code>boolean</code>                            |
+| **`status`** | <code><a href="#errorcode">ErrorCode</a></code> |
+
+
+#### ErrorCode
+
+| Prop              | Type                |
+| ----------------- | ------------------- |
+| **`error`**       | <code>number</code> |
+| **`description`** | <code>string</code> |
+
+
+#### VerifyOptions
+
+| Prop           | Type                                            |
+| -------------- | ----------------------------------------------- |
+| **`verified`** | <code>boolean</code>                            |
+| **`status`**   | <code><a href="#errorcode">ErrorCode</a></code> |
 
 </docgen-api>

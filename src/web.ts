@@ -8,6 +8,7 @@ export class BiometricWeb extends WebPlugin implements BiometricPlugin {
   }
 
   async verify(options: { reason: string }): Promise<VerifyOptions> {
+    console.log(`Reason: ${options.reason}`);
     throw Error("verify not implemented on web")
   }
 }
