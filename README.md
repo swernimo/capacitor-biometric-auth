@@ -1,111 +1,78 @@
-# Capacitor Biometric Auth
-<a href='https://www.npmjs.org/package/capacitor-biometric-auth' target='_blank'><img height='21' style='border:0px;height:21px;' src='https://img.shields.io/npm/dt/capacitor-biometric-auth.svg?label=NPM+Downloads' border='0' alt='NPM Downloads' /></a>
-![CI](https://github.com/arielhernandezmusa/capacitor-biometric-auth/workflows/CI/badge.svg)
+# capacitor-biometric-plugin
 
-## Installation
+A capacitor plugin for using biometric features of android and iOS devices. This is a capacitor 4 version of the plugin created by Ariel Henández Musa https://github.com/arielhernandezmusa/capacitor-biometric-auth.
 
-* `npm i capacitor-biometric-auth`
-* `yarn add capacitor-biometric-auth`
+## Install
 
-## Setup
-Don't for get to run ```npx cap sync``` before doing the next steps.
-
-### Android
-To get android working please add this code to your MainActivity file.
-
-> MainActivity.java
-```diff
-++ import com.ahm.capacitor.biometric.BiometricAuth;
-
-this.init(savedInstanceState, new ArrayList<Class<? extends Plugin>>() {{
-++ add(BiometricAuth.class);
-}});
+```bash
+npm install capacitor-biometric-plugin
+npx cap sync
 ```
 
-### IOS
+## API
 
-@TODO
+<docgen-index>
 
-## Usage
+* [`isAvailable()`](#isavailable)
+* [`verify(...)`](#verify)
+* [Interfaces](#interfaces)
 
-```ts
-import { Plugins } from "@capacitor/core";
+</docgen-index>
 
-const { BiometricAuth } = Plugins;
-
-const available = await BiometricAuth.isAvailable()
-
-if (available.has) {
-  const authResult = await BiometricAuth.verify({...})
-  if (authResult.verified) {
-    // success authentication
-  } else {
-    // fail authentication
-  }
-} else {
-  // biometric not available
-}
- ```
-
-
- ## Methods
-
- #### verify(options)
- Open biometric popup
-
- | option | values | decription |
- | --- | --- | --- |
- | reason | any string | Popup label for iOS|
- | title | any string | Title of prompt in Android |
- | subTitle | any string | Subtitle of prompt in Android |
- | description | any string | Description of prompt in Android |
- | cancel | any string | Text for cancel button on prompt in Android |
-
- ```ts
-const result = await BiometricAuth.verify({reason: "Message ..."})
-```
-
-**result**
-```javascript
-{
-  verified: true // true if biometric auth was succes or false otherwise,
-  status: {} // an object with errors matching biometric auth fails (on if verified === false)
-}
-```
-
-**status**
-
-|error|description|
-|-|-|
-| 10 | The user failed to provide valid credentials |
-| 11 | Authentication was cancelled by application |
-| 12 | The context is invalid |
-| 13 | Not interactive |
-| 14 | Passcode is not set on the device |
-| 15 | Authentication was cancelled by the system |
-| 16 | The user did cancel |
-| 17 | The user chose to use the fallback |
+<docgen-api>
+<!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
 ### isAvailable()
 
-Checks if biometric is enabled
-
-```ts
-const result = await BiometricAuth.isAvailable()
+```typescript
+isAvailable() => Promise<AvailableOptions>
 ```
 
-**result**
-```javascript
-{
-  has: true, // true if has biometric auth enabled, false otherwise
-  status: {...} // an object with errors
-}
+**Returns:** <code>Promise&lt;<a href="#availableoptions">AvailableOptions</a>&gt;</code>
+
+--------------------
+
+
+### verify(...)
+
+```typescript
+verify(options: { reason: string; }) => Promise<VerifyOptions>
 ```
 
-**status**
+| Param         | Type                             |
+| ------------- | -------------------------------- |
+| **`options`** | <code>{ reason: string; }</code> |
 
-|error|description|
-|-|-|
-| 1 | Biometric not available |
-| 2 | Authentication could not continue because the user has been locked out of biometric authentication, due to failing authentication too many times.|
-| 3 | Authentication could not start because the user has not enrolled in biometric authentication.|
+**Returns:** <code>Promise&lt;<a href="#verifyoptions">VerifyOptions</a>&gt;</code>
+
+--------------------
+
+
+### Interfaces
+
+
+#### AvailableOptions
+
+| Prop         | Type                                            |
+| ------------ | ----------------------------------------------- |
+| **`has`**    | <code>boolean</code>                            |
+| **`status`** | <code><a href="#errorcode">ErrorCode</a></code> |
+| **`type`**   | <code>'none' \| 'touch' \| 'face'</code>        |
+
+
+#### ErrorCode
+
+| Prop              | Type                |
+| ----------------- | ------------------- |
+| **`error`**       | <code>number</code> |
+| **`description`** | <code>string</code> |
+
+
+#### VerifyOptions
+
+| Prop           | Type                                            |
+| -------------- | ----------------------------------------------- |
+| **`verified`** | <code>boolean</code>                            |
+| **`status`**   | <code><a href="#errorcode">ErrorCode</a></code> |
+
+</docgen-api>

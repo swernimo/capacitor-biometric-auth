@@ -1,9 +1,3 @@
-declare module "@capacitor/core" {
-  interface PluginRegistry {
-    BiometricAuth: BiometricAuthPlugin;
-  }
-}
-
 export interface ErrorCode {
   error: number;
   description: string;
@@ -12,6 +6,7 @@ export interface ErrorCode {
 export interface AvailableOptions {
   has: boolean;
   status: ErrorCode;
+  type: 'none' | 'touch' | 'face';
 }
 
 export interface VerifyOptions {
@@ -19,7 +14,7 @@ export interface VerifyOptions {
   status: ErrorCode;
 }
 
-export interface BiometricAuthPlugin {
+export interface BiometricPlugin {
   isAvailable(): Promise<AvailableOptions>;
   verify(options: { reason: string }): Promise<VerifyOptions>;
 }

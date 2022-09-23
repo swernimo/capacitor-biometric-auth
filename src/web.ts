@@ -1,27 +1,14 @@
 import { WebPlugin } from '@capacitor/core';
-import { AvailableOptions, VerifyOptions, BiometricAuthPlugin } from './definitions';
 
-export class BiometricAuthWeb extends WebPlugin implements BiometricAuthPlugin {
-  constructor() {
-    super({
-      name: 'BiometricAuth',
-      platforms: ['web']
-    });
-  }
+import type { AvailableOptions, VerifyOptions, BiometricPlugin } from './definitions';
 
+export class BiometricWeb extends WebPlugin implements BiometricPlugin {
   async isAvailable(): Promise<AvailableOptions> {
-    return new Promise(() => {});
+    throw Error("IsAvailable not implemented on web")
   }
 
   async verify(options: { reason: string }): Promise<VerifyOptions> {
-    console.log('OPTIONS', options)
-    return new Promise(() => {});
+    console.log(`Reason: ${options.reason}`);
+    throw Error("verify not implemented on web")
   }
 }
-
-const BiometricAuth = new BiometricAuthWeb();
-
-export { BiometricAuth };
-
-import { registerWebPlugin } from '@capacitor/core';
-registerWebPlugin(BiometricAuth);
